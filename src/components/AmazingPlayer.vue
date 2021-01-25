@@ -7,7 +7,14 @@
                 <div
                     class="play-button"
                     @click="playToggle">
-                    <img :src="require('../assets/icons/streamline-icon-entertainment-control-button-play@.svg')" alt="play-btn">
+                    <img
+                        v-if="!isPlaying"
+                        :src="require('../assets/icons/streamline-icon-entertainment-control-button-play@.svg')"
+                        alt="play-btn">
+                    <img
+                        v-else
+                        :src="require('../assets/icons/icon-pause.svg')"
+                        alt="pause-btn">
                 </div>
             </div>
             <div class="info">
@@ -33,17 +40,19 @@
         </div>
         <div class="controls">
             <div
-                class="controls-button"
+                class="controls-button controls-back"
                 @click="back">
                 <span>15</span>
             </div>
             <div
                 class="controls-play"
                 @click="playToggle">
-                <img :src="require('../assets/icons/play.svg')" alt="play-btn">
+                <img
+                    :src="require('../assets/icons/icon-next.png')"
+                    alt="play-btn">
             </div>
             <div
-                class="controls-button"
+                class="controls-button controls-forward"
                 @click="forward">
                 <span>15</span>
             </div>
@@ -208,7 +217,7 @@ export default {
         .header{
             display: flex;
             flex-wrap: nowrap;
-            margin-bottom: 12px;
+            margin-bottom: 18px;
         }
         .song-image{
             flex: none;
@@ -219,12 +228,13 @@ export default {
             display: flex;
             align-items: center;
             justify-content: center;
-            background: red;
-            background-image: linear-gradient(to top, rgba(9, 9, 9, 0), #161616);
+            background: url("../assets/img/icon-station.jpg"), linear-gradient(to top, rgba(9, 9, 9, 0), #161616);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
             .play-button{
                 width: 41px;
                 height: 40px;
-                padding: 11px 10px 12px 15px;
                 background-color: #ffbd9e;
                 border-radius: 50%;
                 display: flex;
@@ -267,12 +277,15 @@ export default {
             .creator{
                 display: flex;
                 flex-wrap: nowrap;
+                align-items: center;
                 &-avatar{
                     width: 16px;
                     height: 16px;
                     margin-right: 10px;
                     border: solid 1px #979797;
                     border-radius: 50%;
+                    background: url("../assets/img/icon-avatar.jpg") no-repeat center;
+                    background-size: contain;
                 }
                 &-name{
                     width: 128px;
@@ -296,6 +309,7 @@ export default {
             display: flex;
             align-items: center;
             margin-bottom: 24px;
+            user-select: none;
             &-button{
                 width: 32px;
                 height: 32px;
@@ -308,6 +322,14 @@ export default {
                     opacity: .9;
                 }
             }
+            &-back{
+              background: url("../assets/icons/icon-arrow-back.svg") no-repeat center;
+              background-size: contain;
+            }
+            &-forward{
+              background: url("../assets/icons/icon-arrow-forward.svg") no-repeat center;
+              background-size: contain;
+            }
             &-play{
                 margin: 0 30px;
                 width: 32px;
@@ -316,6 +338,10 @@ export default {
                 &:hover{
                     opacity: .9;
                 }
+              img{
+                width: 32px;
+                height: 32px;
+              }
             }
         }
         .progress{
@@ -353,9 +379,12 @@ export default {
                     bottom: 0;
                     width: 14px;
                     height: 10px;
-                    left: 50%;
+                    top: 50%;
+                    transform: translateY(-50%) translateX(-4px);
                     background-color: #ffffff;
                     pointer-events: none;
+                    background: url("../assets/icons/icon-playhead.svg") no-repeat center;
+                    background-size: contain;
                 }
             }
         }
